@@ -1,0 +1,103 @@
+<html>
+	<head>
+		<title>GWC Graphics and Animation Week!</title>
+		<script src="http://cloud.github.com/downloads/processing-js/processing-js/processing-1.4.1.min.js"></script>
+		<script type="text/processing" data-processing-target="mycanvas">
+		//your code goes here
+		// variables
+		var numsBalls = 10;
+		Ball[] store = new Ball[numsBalls];
+	    
+		//1. Setup(): background color, screen size, and whatever your initial screen will look like
+		void setup() {
+			size(800, 600);
+			background(0, 0, 0);
+			
+			// create individual object here
+
+			//how to create object in list
+			for (var i = 0; i < store.length; i++) {
+				store[i] = new Ball();
+			}
+		}
+		
+		//2. Draw()
+		void draw() {
+			noStroke();
+			background(0,0,0);
+			//use method on an object
+			for (var i = 0; i < store.length; i++) {
+				store[i].drawBall();
+				store[i].moveBall();
+			}
+		}
+		
+		//3. Classes
+		class Ball {
+			//attributes
+			//var color; //1 = red, 2 = blue, 3 = green, etc.
+			var r; //red
+			var g; //green
+			var b; //blue
+			var xSpeed;
+			var ySpeed;
+			var xPosition;
+			var yPosition;
+			var size; //could be diameter or radius
+			
+			//constructor, multiple constructors need to have different # of parameters
+			Ball() {
+				size = random(20,30);
+				xPosition = random(0, 800);
+				yPosition = random(0, 600);
+				xSpeed = random(0,10);
+				ySpeed = random(0,10);
+				r = random(0,255);
+				g = random(0, 255);
+				b = random(0,255);
+				
+			}
+			// more specific
+			Ball(s, rVal, gVal, bVal, xPos, yPos) {
+				size = s;
+				r = rVal;
+				g = gVal;
+				b = bVal;
+				xPosition = xPos;
+				yPosition = yPos;
+			}
+			
+			//methods
+			void drawBall() {
+				//make your ellipse
+				fill(r, g, b);
+				ellipse(xPosition, yPosition, size, size);
+			}
+			
+			void moveBall() {
+				//xPosition -= xSpeed
+				//yPosition -= ySpeed
+				xPosition = xPosition + xSpeed; 
+				yPosition = yPosition + ySpeed;
+				
+				//what happens if touching wall
+				if (xPosition >= 800 || xPosition < 0) {
+					//reverse speed (multiply speed by -1)
+					xSpeed = xSpeed * (-1);
+					//ySpeed = ySpeed * (-1);
+				}
+				
+				if (yPosition >= 600 || yPosition < 0){
+					//xSpeed = xSpeed *(-1);
+					ySpeed = ySpeed *(-1);
+				}
+				// if touching top or bottom
+			}
+		}
+		
+		</script>
+	</head>
+	<body>
+		<canvas id="mycanvas"></canvas>
+	</body>
+</html>
