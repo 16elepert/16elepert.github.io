@@ -1,0 +1,194 @@
+<html>
+	<head>
+		<title>GWC Graphics and Animation Week!</title>
+		<script src="http://cloud.github.com/downloads/processing-js/processing-js/processing-1.4.1.min.js"></script>
+		<script type="text/processing" data-processing-target="mycanvas">
+		//your code goes here
+		
+		var nums = random(1,10);
+		Fish[] fishList = new Fish[nums];
+		var rando = random(1,10);
+		Fish[] newList = new Fish[rando];
+		Food[] food = new Food[nums];	
+		
+		var alive = false;
+		var fall = false;
+		
+		var xMousePos;
+		var yMousePos;
+		
+		void setup() {
+			size(870, 660);
+			background(0, 193, 252);
+			fill(255, 219, 166);
+			rect(0, 570, 870, 400);
+			for (var i = 0; i < fishList.length; i++) {
+				fishList[i] = new Fish(random(-20,30));
+				newList[i] = new Fish();
+			}
+			//Food food = new Food();
+			for (var i = 0; i < nums; i++){
+				food[i] = new Food();
+			}
+		}
+		
+		void draw() {
+			background(0, 193, 252);
+			fill(255, 219, 166);
+			rect(0, 570, 870, 400);
+			for (var i = 0; i < fishList.length; i++) {
+				fishList[i].drawFish();
+				fishList[i].moveFish();
+				newList[i].drawFish();
+				newList[i].moveFish();
+			}
+			
+			if (alive === true) {
+				for (var i = 0; i <nums; i++) {
+					food[i].drawFood();
+					food[i].moveFood();
+				}
+			}
+			
+		}
+		
+		void mousePressed(){
+			xMousePos = event.screenX;
+			yMousePos = event.screenY;
+			console.log(xMousePos);
+			console.log(yMousePos);
+			alive = true;
+			
+		}
+	
+		void mouseOver(){
+			var fall = true;
+		}
+		
+		class Fish {
+			//color
+			var r;
+			var g;
+			var b;
+			
+			//x and y position
+			var xPos;
+			var yPos;
+			
+			var xSpeed;
+			var ySpeed;
+			
+			var size;
+			
+			Fish(){
+				r = random(255);
+				g = random(255);
+				b = random(255);
+				
+				xPos = random(0,800);
+				yPos = random(0,600);
+				
+				xSpeed = random(0,5);
+				ySpeed = random(0,5);
+				size = 0;
+			}
+			
+			Fish(s){
+				r = 217;
+				g = 0;
+				b = 250;
+				xPos = random(0,800);
+				yPos = random(0,600);
+				
+				xSpeed = random(0,5);
+				ySpeed = random(0,5);
+				size = s;
+			}
+			
+			void drawFish() {
+				noStroke();
+    			fill(r, g, b);
+    			ellipse(50+xPos, 36+yPos, 50, 30+size);
+    			triangle(10+xPos, 10+yPos, 10+xPos, 60+yPos,30+xPos, 40+yPos);
+			}
+			
+			void moveFish() {
+				xPos = xPos + xSpeed; 
+				yPos = yPos + ySpeed;
+				
+				//what happens if touching wall
+				if (xPos >= 800 || xPos < 0) {
+					//reverse speed (multiply speed by -1)
+					xSpeed = xSpeed * (-1);
+					//ySpeed = ySpeed * (-1);
+				}
+				
+				if (yPos >= 600 || yPos < 0){
+					//xSpeed = xSpeed *(-1);
+					ySpeed = ySpeed *(-1);
+				}
+				/*
+				// if statements underneath can be removed from optimal running
+				// un comment the section below to enter frenzy mode
+				if (food[1].xPos < xPos) { 
+					console.log(food[1].xPos);
+					console.log("trying");
+					xSpeed -= 1;
+				} else if (food[1].xPos > xPos) {
+					xSpeed +=1;
+				} else if (food[1].xPos = xPos) {
+					xSpeed += 0;
+				}
+				
+				if (food[1].yPos < yPos) {
+					ySpeed -= 1;
+				} else if (food[1].yPos < yPos) {
+					ySpeed += 1;
+				} else if (food[1].yPos = yPos) {
+					ySpeed += 0;
+				}*/
+				
+			}
+		
+		}
+		
+		class Food {
+			var xPosition;
+			var yPosition;
+			
+			var xOff;
+			var yOff;
+			
+			var ySpeed;
+			
+			//this.xPos;
+			//this.yPos;
+			var xPos = 900;
+			var yPos = 900;
+			
+			Food(){
+				xOff = random(-10, 50);
+				yOff = random(-10,50);
+				//console.log(xOff);
+			}
+			
+			void drawFood(){
+				fill(242, 153, 19);
+				xPos = xMousePos-10+xOff;
+				yPos = yMousePos-128+yOff
+				rect(xPos, yPos, 15, 15);
+				//return yPos;
+			}
+			
+			void moveFood(){
+				yMousePos = yMousePos + 0.5;
+				//yOff = yOff +0.5;
+				
+			}
+		}
+		</script>
+	</head>
+	<body>
+		<canvas id="mycanvas"></canvas>
+	</body>
+</html>
