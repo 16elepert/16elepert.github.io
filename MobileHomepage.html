@@ -1,0 +1,182 @@
+<html>
+	<!-- this is where the header goes -->
+	<head>
+		<title> About me </title> 
+		<style> 
+			h2 {
+				font: bold 30px verdana, sans-serif;
+				position: relative;
+				left: 70px;
+			}
+			
+			.blueText {
+				color: #000099;
+				font-weight:bold;
+			}
+			
+			.redText {
+				color: #B80000;
+				font-weight: bold;
+			}
+			
+			.greenText {
+				color:#006600;
+				font-weight: bold;
+			}
+			
+			.purpleText {
+				color: #5200A3 ;
+				font-weight:bold;
+			}
+			
+			h1 {
+				color: #CC0000;
+				font: 30px verdana, sans-serif;
+			}
+			
+			p {
+				color: #660066;
+				font: bold 20px times, serif;
+			}
+			
+			#image1 {
+				position: relative;
+				left: 65px;
+				display: inline-block;
+			}
+			
+			#city {
+				position: relative;
+				left:130px;
+				display: inline-block;
+				vertical-align: top;
+			}
+			
+			#image2 {
+				position: relative;
+				left: -115px;
+				display: inline-block;
+			}
+			
+			#fish{
+				position: relative;
+				left:-1200px;
+				display: inline-block;
+				vertical-align: top;
+			}
+			
+			#image3 {
+				position: relative;
+				left: 65px;
+				display: inline-block;
+			}
+			
+			.outline {
+				margin: 30px 90px;
+				padding: 20px;
+				border-style: solid;
+				border-width: 10px;
+			}
+			
+			#head {
+				position: fixed;
+				background-color: #F8DCE5;
+				width:101%;
+				top: -5px;
+				left: -5px;
+			}
+		</style>
+		<meta name = "viewport" content ="width=device-width, initial-scale=1">
+		<!--link to stylesheet(CSS libraries for mobile devices) -don't need to do this for websites because it is automatic -->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css"/>
+
+		<!--jquery library-->
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<!--jquery library specifically for mobile devices-->
+		<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+		<script>
+			function changePage(){
+				// calling the id of the menu
+				//.val gets value of boject
+				//alert($('#theChoices').val());
+				// this will change the image
+				//attr = attribute
+				//window.location.replace($('#theChoices').val() + '.html');
+				/*var url = $('#theChoices').val() + '.html';    
+				$(location).attr('href',url);*/
+				window.location.href=$('#theChoices').val() + '.html';
+			}
+		</script>
+		<script src="processing-1.4.1.js"></script>
+		
+	</head>
+	<body>
+		<!-- Homepage -->
+		<div data-role="page" id="page1">
+			<div data-role="header">
+				<h1> Homepage </h1>
+			</div>
+			<div data-role="content">
+				<label for="select-choice-a" class="select">Choose a project:</label>
+				<!-- data... overrides what phone would output and uses what jquery uses-->
+				<select name="select-choice-a" id="theChoices" data-native-menu="false">
+					<option>Choose a project:</option>
+					<option value="City">City Scroller</option>
+					<option value="FishTank">Fish Tank</option>
+					<option value="ClassGroup">Ball</option>
+					<!-- add a button to show image of animal -->
+					<input type="button" value="Submit" data-theme="b" onclick="changePage()">
+				</select>
+			</div>
+			<div data-role="footer">
+				<h4></h4>
+			</div>
+		</div>
+
+		<div data-role="page" id="cityScroller">
+			<div class="outline" style="position: relative; top: 100px; border-color: #EFB7C8; ">
+			<h1 style ="position: relative;left: 180px;"> City Scroller </h1>
+			<div id="city">
+				<p> This is my project City Scroller. </p>
+				<p> Click on the image to go to the webpage with the project running on it. </p>
+			</div>
+			<div> 
+				<embed src="City.html">
+			</div>
+			
+			</div>
+		</div>
+
+		<div data-role="page" id="fishTank">
+			<div class="outline" style="position: relative; top: 100px;border-color: #C05B7A;">
+				<h1 style="position: relative; left: 830px;"> Fish Tank </p>
+				<div id="fish">
+					<p> This is my project Fish Tank. </p>
+					<p> Click on the image to go to the webpage with the project running on it. </p>
+				</div>
+				<div>
+					<embed src="FishTank.html">
+				</div>
+			
+			</div>
+		</div>
+
+		<div data-role="page" id="ball">
+			<div class="outline" style="position: relative; top: 100px;border-color: #9B3151;">
+			<h1 style="position: relative; left: 180px;"> Ball Bounce </h1>
+			<div id="image3">
+				<a href="ClassGroup.html" target="_blank">
+					<img src="images/Ball.png" style="width:400px; height:auto;">
+				</a>
+			</div>
+			<div id="city">
+				<p> This is my project Ball Bounce. </p>
+				<p> Click on the image to go to the webpage with the project running on it. </p>	
+			</div>
+			</div>
+			<div id="head">
+				<h2 class="blueText"> Emily Lepert </h2>
+			</div>
+		</div>
+	</body>
+</html>
